@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lerp</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        #myCanvas {
+            background-color: aliceblue;
+        }
+
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="myCanvas"></canvas>
+
+
+
+    <script>
+        myCanvas.width = window.innerWidth;
+        myCanvas.height = window.innerHeight;
+
+        const A = { x: 100, y: 200 };
+        const B = { x: 400, y: 200 };
+
+
+        //step1: draw dot
+
+        const ctx = myCanvas.getContext("2d");
+        ctx.beginPath();
+        ctx.fillStyle = "white";
+        ctx.strokeStyle = "black";
+        ctx.arc(A.x, A.y, 15, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = "black";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.font = "bold 14px Arial";
+        ctx.fillText("A", A.x, A.y);
+
+
+    </script>
+
+</body>
+
+
+
+
+</html>
