@@ -30,7 +30,32 @@
 
         const ctx = myCanvas.getContext("2d");
 
+        function animate() {
+            ctx.clearRect(0, 0, myCanvas.width, myCanvas.height)
+            const sec = new Date().getTime() / 1000;
+            //animating movement by taking the floored value seconds
+            //const t = sec - Math.floor(sec);
 
+            //sin add one to make it between 0-2 and /divide by 2 so between 0-1
+            //2pi seconds to make a revolution so a move per second multiply by pi
+            const t = (Math.sin(sec * Math.PI) + 1) / 2;
+            // const C = vLerp(A, B, t);
+            const C = vLerp(A, B, t)
+            drawDot(A, "A");
+            drawDot(B, "B");
+            drawDot(C, " ");
+            // const [r, g, b] = [255, 156, 0];
+            // const [r, g, b] = [184, 0, 31];
+            // myCanvas.style.backgroundColor = `rgb(${r},${g},${b})`;
+
+            const { r, g, b } = vLerp({ r: 255, g: 156, b: 0 }, { r: 57, g: 75, b: 112 }, t);
+
+            myCanvas.style.backgroundColor = `rgb(${r},${g},${b})`;
+
+            requestAnimationFrame(animate);
+        }
+
+        // animate();
 
         function drawDot(pos, label) {
             ctx.beginPath();
@@ -46,31 +71,25 @@
             ctx.fillText(label, pos.x, pos.y);
         }
 
-        const t = 1 / 2;
-
+        // return a + (b - a) * t;
+        // return a  + b * t - a * t;
         function lerp(a, b, t) {
-            // return a + (b - a) * t;
-            // return a  + b * t - a * t;
             return a * (1 - t) + b * t;
         }
 
         function vLerp(A, B, t) {
-            return {
-                x: lerp(A.x, B.x, t),
-                y: lerp(A.y, B.y, t)
-            };
+            // return {
+            //     x: lerp(A.x, B.x, t),
+            //     y: lerp(A.y, B.y, t)
+            // };
+            const res = {};
+            for (let attr in A) {
+                res[attr] = lerp(A[attr], B[attr], t);
+            }
+            return res;
         }
 
-        drawDot(A, "A");
-        drawDot(B, "B");
 
-        const n = 10;
-        for (let i = 1; i < n - 1; i++) {
-            const t = i / (n - 1);
-            const D = vLerp(A, B, t);
-            drawDot(D, i + "0%")
-
-        }
 
     </script>
 
